@@ -1,0 +1,849 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Minecraft', Arial, sans-serif;
+}
+
+@font-face {
+  font-family: 'Minecraft';
+  src: url('https://fonts.cdnfonts.com/css/minecraft-4');
+}
+
+/* 1) Use your tile as a repeat background */
+body {
+  background-color: #333;           /* fallback base color */
+  background-image: url('pixels.png');
+  background-repeat: repeat;
+  background-size: 60px 60px;       /* size of each “pixel block” */
+  
+  /* 2) Force nearest-neighbor scaling for sharp pixels */
+  image-rendering: crisp-edges;      /* standard */
+  image-rendering: pixelated;        /* Chrome/Edge */
+  
+  color: #eee;
+  font-family: 'Press Start 2P', Arial, sans-serif;
+}
+
+
+.hidden {
+  display: none !important;
+}
+
+/* Startup Animation */
+.startup-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.minecraft-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.loading-text {
+    font-size: 2rem;
+    color: #55ff55;
+    text-shadow: 3px 3px 0 #000;
+}
+/* instead of .block { … } */
+.dirt-block,
+.grass-block,
+.stone-block,
+.diamond-block {
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  display: inline-block;
+  animation: float 2s infinite ease-in-out;
+}
+
+/* keep your image URLs */
+.dirt-block   { background-image: url('stone.png');    animation-delay: 0s; }
+.grass-block  { background-image: url('red.png'); animation-delay: 0.2s; }
+.stone-block  { background-image: url('dimond.png');   animation-delay: 0.4s; }
+.diamond-block{ background-image: url('green.png');  animation-delay: 0.6s; }
+
+.block {
+    width: 60px;
+    height: 60px;
+    margin: 0 10px;
+    background-size: cover;
+    display: inline-block;
+    animation: float 2s infinite ease-in-out;
+}
+
+.dirt-block {
+    background-image: url('red.png');
+    animation-delay: 0s;
+}
+
+.grass-block {
+    background-image: url('dimond.png');
+    animation-delay: 0.2s;
+}
+
+.stone-block {
+    background-image: url('stone.png');
+    animation-delay: 0.4s;
+}
+
+.diamond-block {
+    background-image: url('green.png');
+    animation-delay: 0.6s;
+}
+
+.progress-bar {
+    width: 300px;
+    height: 20px;
+    background-color: #333;
+    border: 3px solid #555;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background-color: #55ff55;
+    width: 0;
+    transition: width 0.3s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Main Content Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 40px;
+    z-index: 100;
+    transition: background-color 0.3s;
+}
+
+.navbar.scrolled {
+    background-color: #111;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 2rem;
+    color: #ff5555;
+    text-shadow: 3px 3px 0 #000;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-item a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.nav-item.active a {
+    color: #55ff55;
+    font-weight: bold;
+}
+
+.nav-item a:hover {
+    color: #55ff55;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.search-box {
+    padding: 8px 15px 8px 35px;
+    background-color: rgba(0,0,0,0.5);
+    border: 1px solid #444;
+    color: white;
+    border-radius: 4px;
+    width: 200px;
+}
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+    overflow: hidden;
+    background-image:
+      url('main2.png'),
+      linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+}
+
+.hero-title {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 4px 4px 0 #000;
+}
+
+.hero-description {
+    margin: 20px 0;
+    font-size: 1.2rem;
+    line-height: 1.5;
+	color: white;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.hero-buttons .btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.hero-buttons .play-btn {
+    background-color: #e50914;
+    color: #fff;
+}
+.hero-buttons .play-btn:hover {
+    background-color: #f6121d;
+    transform: translateY(-2px);
+}
+
+.hero-buttons .info-btn {
+    background-color: rgba(229, 9, 20, 0.7);
+    color: #fff;
+}
+.hero-buttons .info-btn:hover {
+    background-color: rgba(229, 9, 20, 0.9);
+    transform: translateY(-2px);
+}
+
+.hero-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 7.4rem;
+    background-image: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(17, 17, 17, 0.6),
+      #111
+    );
+    z-index: 1;
+}
+
+/* Content Rows */
+/* …your existing CSS above stays the same… */
+
+/* Content Rows */
+.content {
+    position: relative;
+    z-index: 2;
+    margin-top: -100px;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+	
+}
+
+.row {
+    margin-bottom: 40px;
+}
+
+.row-title {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.row-content {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+.row-content::-webkit-scrollbar {
+    display: none;
+}
+
+/* ─── Continue Watching: enhanced cards ─── */
+.row-content .item {
+    flex: 0 0 180px;           /* wider cards */
+    max-width: 180px;
+    min-width: 180px;
+    margin-right: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+/* 1) Pad the card container so text never overlaps the bar */
+.row-content .item {
+  padding-bottom: 16px;    /* extra space beneath the bar */
+}
+
+/* 2) Lift the progress bar up a bit */
+.row-content .item .progress-bar {
+  bottom: 20px;            /* push it 20px from the bottom of the card */
+}
+
+/* 3) Space out the info text further */
+.item-info {
+  margin-top: 12px;        /* more gap between bar and text */
+}
+
+
+.row-content .item:hover {
+    transform: scale(1.05);
+}
+
+.row-content .item img {
+    width: 100%;
+    height: 135px;             /* taller image for more detail */
+    object-fit: cover;
+    border-radius: 6px;        /* soft corners */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    display: block;
+    border: none;              /* remove any default border */
+}
+
+/* red progress bar, no gray track/border */
+.row-content .item .progress-bar {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    height: 5px;
+    background: none;          /* kill the gray track */
+    border: none;              /* kill any border */
+    border-radius: 3px;
+}
+
+.row-content .item .progress-bar .progress {
+    width: 100%;
+    height: 100%;
+    background-color: #e50914; /* Netflix-red */
+    border-radius: 3px;
+}
+
+/* info block (title + meta) under each thumbnail */
+.item-info {
+    margin-top: 8px;
+    text-align: center;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+.item-info .item-title {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-info .item-meta {
+    font-size: 0.75rem;
+    color: #fff;
+}
+
+/* pixel font helper */
+.pixel-text {
+    font-family: 'Minecraft', monospace;
+    letter-spacing: 2px;
+}
+/* ─── TV Shows Page Specific Styles ─── */
+.tvshows-content {
+  padding: 80px 40px 40px;
+  background-color: #111;
+}
+
+.tvshows-hero {
+  height: 50vh;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
+    url('minecraft.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.category-section {
+  margin-bottom: 50px;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #55ff55;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.category-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.category-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.category-item img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.category-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 15px;
+  color: white;
+}
+
+.category-info h3 {
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+}
+
+.category-info p {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* ─── Movies Page Specific Styles ─── */
+.movies-hero {
+  height: 60vh;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+    url('minecraft.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.featured-movies,
+.movie-categories {
+  padding: 0 40px 40px;
+}
+
+.movies-grid {
+  display: grid;
+  grid-auto-flow: column;      /* lay out one column after another */
+  grid-auto-columns: 220px;    /* each column is exactly 220px wide */
+  gap: 25px;
+
+  overflow-x: auto;            /* allow side-to-side scroll */
+  overflow-y: hidden;          /* prevent vertical scroll */
+  padding: 0 10px;
+  scroll-behavior: smooth;
+}
+
+.movies-grid::-webkit-scrollbar {
+  display: none;
+}
+
+
+.movie-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+.movie-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+  padding: 15px;
+  color: white;
+}
+
+.movie-info h3 {
+  margin-bottom: 8px;
+  font-size: 1.3rem;
+}
+
+.movie-meta {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.watch-btn {
+  width: 100%;
+  padding: 8px 0;
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.watch-btn:hover {
+  background-color: #f6121d;
+}
+
+
+/* ─── New & Popular Page Styles ─── */
+.new-hero {
+  height: 80vh;
+  background:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
+    url('lahna.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.trending-section,
+.recent-section {
+  padding: 0 40px 40px;
+}
+
+.trending-grid,
+.recent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.trending-item,
+.recent-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.trending-item:hover,
+.recent-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.trending-item img,
+.recent-item img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  display: block;
+}
+
+.trending-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: #e50914;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.trending-info,
+.recent-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+  padding: 15px;
+  color: white;
+}
+
+.trending-info h3,
+.recent-info h3 {
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+}
+
+.trending-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.recent-info p {
+  font-size: 0.9rem;
+  color: #55ff55;
+  margin-top: 5px;
+}
+
+
+/* ─── My List Page - Advanced Styling ─── */
+.mylist-hero {
+  height: 40vh;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+    url('minecraft.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.floating-blocks {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.block {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+.dirt {
+  background-image: url('stone.png');
+  top: 20%;
+  left: 10%;
+  animation-delay: 0.5s;
+}
+
+.grass {
+  background-image: url('green.png');
+  top: 30%;
+  right: 15%;
+  animation-delay: 1s;
+}
+
+.diamond {
+  background-image: url('dimond.png');
+  bottom: 20%;
+  left: 50%;
+  animation-delay: 1.5s;
+}
+
+/* Saved Content Grid */
+.saved-content {
+  padding: 40px;
+}
+
+.saved-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.saved-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.saved-item:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+}
+
+.saved-item img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.saved-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.saved-item:hover .saved-overlay {
+  opacity: 1;
+}
+
+.saved-overlay .btn {
+  margin: 5px;
+  width: 80%;
+  text-align: center;
+}
+
+.play-btn {
+  background-color: #e50914;
+}
+
+.remove-btn {
+  background-color: #333;
+}
+
+.saved-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+  padding: 15px;
+  color: white;
+}
+
+.saved-meta {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin: 5px 0;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 50px;
+  display: none; /* Hidden by default (show via JS if list is empty) */
+}
+
+.empty-icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.empty-title {
+  font-size: 2rem;
+  color: #55ff55;
+  margin-bottom: 10px;
+}
+
+.empty-description {
+  font-size: 1.1rem;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+.discover-btn {
+  background-color: #e50914;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.discover-btn:hover {
+  transform: scale(1.05);
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlockFlix - My List</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="logo">
+        <span class="pixel-text">BLOCKFLIX</span>
+      </div>
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="tvshows.html">TV Shows</a></li>
+          <li class="nav-item"><a href="movies.html">Movies</a></li>
+          <li class="nav-item"><a href="new.html">New & Popular</a></li>
+          <li class="nav-item active"><a href="mylist.html">My List</a></li>
+        </ul>
+      </nav>
+      <div class="nav-right">
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" class="search-box" placeholder="Search...">
+        </div>
+        <div class="profile">
+          <img src="main.png" alt="Profile" class="profile-img">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Floating Blocks -->
+  <section class="mylist-hero animate__animated animate__fadeIn">
+    <div class="hero-content">
+      <h1 class="hero-title pixel-text animate__animated animate__zoomIn">MY LIST</h1>
+      <p class="hero-description animate__animated animate__fadeInUp">
+        Your saved Minecraft adventures, movies, and series—all in one place!
+      </p>
+    </div>
+    <div class="floating-blocks">
+      <div class="block dirt animate__animated animate__bounce"></div>
+      <div class="block grass animate__animated animate__bounce"></div>
+      <div class="block diamond animate__animated animate__bounce"></div>
+    </div>
+  </section>
+
+  <!-- Saved Content Section -->
+  <section class="saved-content">
+    <h2 class="section-title pixel-text animate__animated animate__fadeInLeft">YOUR SAVED CONTENT</h2>
+    <div class="saved-grid">
+      <!-- Saved Item 1 (with hover animation) -->
+      <div class="saved-item animate__animated animate__fadeInUp">
+        <img src="solo.png" alt="Creeper Chronicles">
+        <div class="saved-overlay">
+          <button class="btn play-btn"><i class="fas fa-play"></i> Play</button>
+          <button class="btn remove-btn"><i class="fas fa-times"></i> Remove</button>
+        </div>
+        <div class="saved-info">
+          <h3>Solo leveling</h3>
+          <p class="saved-meta">TV Show · 2 Seasons</p>
+          <div class="progress-bar">
+            <div class="progress" style="width: 65%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved Item 2 -->
+      <div class="saved-item animate__animated animate__fadeInUp">
+        <img src="main2.png" alt="Nether Quest">
+        <div class="saved-overlay">
+          <button class="btn play-btn"><i class="fas fa-play"></i> Play</button>
+          <button class="btn remove-btn"><i class="fas fa-times"></i> Remove</button>
+        </div>
+        <div class="saved-info">
+          <h3>Nether Quest</h3>
+          <p class="saved-meta">Movie · 1h 42m</p>
+          <div class="progress-bar">
+            <div class="progress" style="width: 30%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- More saved items... -->
+    </div>
+  </section>
+
+  <!-- Empty State (if list is empty) -->
+  <div class="empty-state animate__animated animate__fadeIn">
+    <img src="https://i.imgur.com/QNbka7r.png" alt="Empty Chest" class="empty-icon">
+    <h2 class="empty-title pixel-text">YOUR LIST IS EMPTY</h2>
+    <p class="empty-description">Start adding Minecraft movies and shows to watch later!</p>
+    <button class="btn discover-btn animate__animated animate__pulse animate__infinite">
+      <i class="fas fa-search"></i> Discover Content
+    </button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
